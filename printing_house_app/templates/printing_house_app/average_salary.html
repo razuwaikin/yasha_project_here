@@ -1,0 +1,11 @@
+{% extends "printing_house_app/base.html" %}
+
+{% block title %}Average Salary{% endblock %}
+
+{% block content %}
+<h2>Average Employee Salary</h2>
+
+<p>The average salary of all employees is: <strong>${{ average_salary|floatformat:2 }}</strong></p>
+
+<a href="{% url 'dashboard' %}" class="btn">Back to Dashboard</a>
+{% endblock %}

@@ -1,0 +1,227 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "username": "admin",
+      "first_name": "Admin",
+      "last_name": "User",
+      "email": "admin@example.com",
+      "password": "pbkdf2_sha256$600000$bZszZulmLsqmP0pzJkG1BV$/RjFoO3yBbdt78jPkQ1OsGXCSfe7yJRVuzgRX905S7o=",
+      "is_staff": true,
+      "is_active": true,
+      "is_superuser": true,
+      "date_joined": "2023-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "username": "client1",
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john@example.com",
+      "password": "pbkdf2_sha256$600000$bZszZulmLsqmP0pzJkG1BV$/RjFoO3yBbdt78jPkQ1OsGXCSfe7yJRVuzgRX905S7o=",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "date_joined": "2023-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+      "username": "employee1",
+      "first_name": "Jane",
+      "last_name": "Smith",
+      "email": "jane@example.com",
+      "password": "pbkdf2_sha256$600000$bZszZulmLsqmP0pzJkG1BV$/RjFoO3yBbdt78jPkQ1OsGXCSfe7yJRVuzgRX905S7o=",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "date_joined": "2023-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "printing_house_app.contacts",
+    "pk": 1,
+    "fields": {
+      "user": 2,
+      "full_name": "John Doe",
+      "gender": "M",
+      "age": 30,
+      "home_address": "123 Main St, City, Country"
+    }
+  },
+  {
+    "model": "printing_house_app.contacts",
+    "pk": 2,
+    "fields": {
+      "user": 3,
+      "full_name": "Jane Smith",
+      "gender": "F",
+      "age": 28,
+      "home_address": "456 Elm St, City, Country"
+    }
+  },
+  {
+    "model": "printing_house_app.premises",
+    "pk": 1,
+    "fields": {
+      "area": "500.00",
+      "machines_count": 10,
+      "type": "Printing Press"
+    }
+  },
+  {
+    "model": "printing_house_app.premises",
+    "pk": 2,
+    "fields": {
+      "area": "300.00",
+      "machines_count": 5,
+      "type": "Binding Room"
+    }
+  },
+  {
+    "model": "printing_house_app.employees",
+    "pk": 1,
+    "fields": {
+      "user": 3,
+      "position": "Manager",
+      "salary": "50000.00",
+      "premises": 1
+    }
+  },
+  {
+    "model": "printing_house_app.access",
+    "pk": 1,
+    "fields": {
+      "access_level": "Admin",
+      "employee_position": "Manager",
+      "password": "securepass",
+      "employee": 1
+    }
+  },
+  {
+    "model": "printing_house_app.service",
+    "pk": 1,
+    "fields": {
+      "package": "Basic Print",
+      "material": "Paper",
+      "premises": 1,
+      "type": "Color Printing",
+      "cost": "10.00"
+    }
+  },
+  {
+    "model": "printing_house_app.service",
+    "pk": 2,
+    "fields": {
+      "package": "Premium Print",
+      "material": "Glossy Paper",
+      "premises": 1,
+      "type": "High Quality Printing",
+      "cost": "20.00"
+    }
+  },
+  {
+    "model": "printing_house_app.deliverystatus",
+    "pk": 1,
+    "fields": {
+      "status": "Pending",
+      "count": 0
+    }
+  },
+  {
+    "model": "printing_house_app.deliverystatus",
+    "pk": 2,
+    "fields": {
+      "status": "In Transit",
+      "count": 0
+    }
+  },
+  {
+    "model": "printing_house_app.deliverystatus",
+    "pk": 3,
+    "fields": {
+      "status": "Delivered",
+      "count": 0
+    }
+  },
+  {
+    "model": "printing_house_app.order",
+    "pk": 1,
+    "fields": {
+      "client_name": "John Doe",
+      "order_date": "2023-10-01",
+      "print_date": "2023-10-05",
+      "service_package": "Basic Print",
+      "quantity": 100,
+      "amount": "1000.00",
+      "address": "123 Main St, City, Country",
+      "client": 1,
+      "service": 1,
+      "premises": 1
+    }
+  },
+  {
+    "model": "printing_house_app.order",
+    "pk": 2,
+    "fields": {
+      "client_name": "Jane Smith",
+      "order_date": "2023-10-02",
+      "print_date": "2023-10-06",
+      "service_package": "Premium Print",
+      "quantity": 50,
+      "amount": "1000.00",
+      "address": "456 Elm St, City, Country",
+      "client": 2,
+      "service": 2,
+      "premises": 1
+    }
+  },
+  {
+    "model": "printing_house_app.delivery",
+    "pk": 1,
+    "fields": {
+      "packaging_type": "Box",
+      "volume": "10.00",
+      "weight": "5.00",
+      "address": "123 Main St, City, Country",
+      "order": 1,
+      "employee": 1,
+      "status": 1
+    }
+  },
+  {
+    "model": "printing_house_app.delivery",
+    "pk": 2,
+    "fields": {
+      "packaging_type": "Envelope",
+      "volume": "5.00",
+      "weight": "2.00",
+      "address": "456 Elm St, City, Country",
+      "order": 2,
+      "employee": 1,
+      "status": 2
+    }
+  },
+  {
+    "model": "printing_house_app.review",
+    "pk": 1,
+    "fields": {
+      "review_text": "Great service, fast delivery!",
+      "order": 1
+    }
+  },
+  {
+    "model": "printing_house_app.review",
+    "pk": 2,
+    "fields": {
+      "review_text": "Quality printing, will order again.",
+      "order": 2
+    }
+  }
+]

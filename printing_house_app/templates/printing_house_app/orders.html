@@ -1,0 +1,44 @@
+{% extends "printing_house_app/base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<h2>{{ title }}</h2>
+
+{% if orders %}
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Client</th>
+            <th>Service</th>
+            <th>Quantity</th>
+            <th>Amount</th>
+            <th>Order Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.client_name }}</td>
+            <td>{{ order.service.type }}</td>
+            <td>{{ order.quantity }}</td>
+            <td>${{ order.amount }}</td>
+            <td>{{ order.order_date }}</td>
+            <td>{{ order.delivery.status.status }}</td>
+            <td>
+                {% if user.groups.filter.name == 'client' and not order.review %}
+                    <a href="{% url 'create_review' %}?order={{ order.id }}" class="btn">Leave Review</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No orders found.</p>
+{% endif %}
+{% endblock %}

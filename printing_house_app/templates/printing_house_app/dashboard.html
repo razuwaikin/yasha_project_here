@@ -1,0 +1,45 @@
+{% extends "printing_house_app/base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h2>Dashboard</h2>
+
+{% load custom_tags %}
+{% if user|has_role_filter:'client' %}
+    <h3>Client Dashboard</h3>
+    <p>Welcome to the Printing House system. As a client, you can:</p>
+    <ul>
+        <li><a href="{% url 'my_orders' %}" class="btn">View My Orders</a></li>
+        <li><a href="{% url 'create_review' %}" class="btn">Leave a Review</a></li>
+    </ul>
+{% elif user|has_role_filter:'manager' %}
+    <h3>Manager Dashboard</h3>
+    <p>As a manager, you can:</p>
+    <ul>
+        <li><a href="{% url 'all_orders' %}" class="btn">View All Orders</a></li>
+        <li><a href="{% url 'average_salary' %}" class="btn">View Average Salary</a></li>
+        <li><a href="{% url 'completed_orders' %}" class="btn">View Completed Orders</a></li>
+        <li><a href="{% url 'create_order' %}" class="btn">Create New Order</a></li>
+    </ul>
+{% elif user|has_role_filter:'courier' %}
+    <h3>Courier Dashboard</h3>
+    <p>As a courier, you can:</p>
+    <ul>
+        <li><a href="{% url 'my_deliveries' %}" class="btn">View My Deliveries</a></li>
+    </ul>
+{% elif user|has_role_filter:'owner' %}
+    <h3>Owner Dashboard</h3>
+    <p>As the owner, you have full access:</p>
+    <ul>
+        <li><a href="{% url 'all_orders' %}" class="btn">View All Orders</a></li>
+        <li><a href="{% url 'average_salary' %}" class="btn">View Average Salary</a></li>
+        <li><a href="{% url 'completed_orders' %}" class="btn">View Completed Orders</a></li>
+        <li><a href="{% url 'create_order' %}" class="btn">Create New Order</a></li>
+        <li><a href="/admin/" class="btn">Admin Panel</a></li>
+    </ul>
+{% else %}
+    <h3>Welcome</h3>
+    <p>You are logged in but no specific role is assigned. Please contact administrator.</p>
+{% endif %}
+{% endblock %}
