@@ -10,6 +10,8 @@ urlpatterns = [
     path('api/deliveries/by-courier/<int:employee_id>/', views.DeliveriesByCourierView.as_view(), name='api-deliveries-by-courier'),
     path('api/reviews/', views.ReviewCreateView.as_view(), name='api-create-review'),
     path('api/orders/completed/', views.CompletedOrdersView.as_view(), name='api-completed-orders'),
+    path('api/reports/reviews/', views.ReviewsReportView.as_view(), name='api-reviews-report'),
+    path('api/reports/deliveries/', views.DeliveriesReportView.as_view(), name='api-deliveries-report'),
 
     # UI views
     path('login/', views.login_view, name='login'),
@@ -22,4 +24,6 @@ urlpatterns = [
     path('completed-orders/', views.completed_orders_view, name='completed_orders'),
     path('create-order/', views.create_order, name='create_order'),
     path('create-review/', views.create_review, name='create_review'),
+    path('reports/reviews/', views.reviews_report, name='reviews_report'),
+    path('reports/deliveries/', views.deliveries_report, name='deliveries_report'),
 ]

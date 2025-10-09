@@ -1,0 +1,92 @@
+erDiagram
+    User {
+        int id PK
+        varchar username
+        varchar email
+        varchar password
+        bool is_staff
+        bool is_active
+        bool is_superuser
+        datetime date_joined
+    }
+    Contacts {
+        int id PK
+        int user_id FK
+        varchar full_name
+        varchar gender
+        int age
+        text home_address
+    }
+    Premises {
+        int id PK
+        decimal area
+        int machines_count
+        varchar type
+    }
+    Employees {
+        int id PK
+        int user_id FK
+        varchar position
+        decimal salary
+        int premises_id FK
+    }
+    Access {
+        int id PK
+        varchar access_level
+        varchar employee_position
+        varchar password
+        int employee_id FK
+    }
+    Service {
+        int id PK
+        varchar package
+        varchar material
+        int premises_id FK
+        varchar type
+        decimal cost
+    }
+    DeliveryStatus {
+        int id PK
+        varchar status
+        int count
+    }
+    Order {
+        int id PK
+        varchar client_name
+        date order_date
+        date print_date
+        varchar service_package
+        int quantity
+        decimal amount
+        text address
+        int client_id FK
+        int service_id FK
+        int premises_id FK
+    }
+    Delivery {
+        int id PK
+        varchar packaging_type
+        decimal volume
+        decimal weight
+        text address
+        int order_id FK
+        int employee_id FK
+        int status_id FK
+    }
+    Review {
+        int id PK
+        text review_text
+        int order_id FK
+    }
+    User ||--|| Contacts : "user_id"
+    User ||--|| Employees : "user_id"
+    Contacts ||--o{ Order : "client_id"
+    Premises ||--o{ Employees : "premises_id"
+    Premises ||--o{ Service : "premises_id"
+    Premises ||--o{ Order : "premises_id"
+    Employees ||--|| Access : "employee_id"
+    Employees ||--o{ Delivery : "employee_id"
+    Service ||--o{ Order : "service_id"
+    Order ||--|| Delivery : "order_id"
+    Order ||--|| Review : "order_id"
+    DeliveryStatus ||--o{ Delivery : "status_id"

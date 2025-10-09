@@ -45,6 +45,51 @@
     }
   },
   {
+    "model": "auth.user",
+    "pk": 4,
+    "fields": {
+      "username": "client2",
+      "first_name": "Alice",
+      "last_name": "Johnson",
+      "email": "alice@example.com",
+      "password": "pbkdf2_sha256$600000$bZszZulmLsqmP0pzJkG1BV$/RjFoO3yBbdt78jPkQ1OsGXCSfe7yJRVuzgRX905S7o=",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "date_joined": "2023-01-02T00:00:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 5,
+    "fields": {
+      "username": "client3",
+      "first_name": "Bob",
+      "last_name": "Brown",
+      "email": "bob@example.com",
+      "password": "pbkdf2_sha256$600000$bZszZulmLsqmP0pzJkG1BV$/RjFoO3yBbdt78jPkQ1OsGXCSfe7yJRVuzgRX905S7o=",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "date_joined": "2023-01-03T00:00:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 6,
+    "fields": {
+      "username": "employee2",
+      "first_name": "Charlie",
+      "last_name": "Davis",
+      "email": "charlie@example.com",
+      "password": "pbkdf2_sha256$600000$bZszZulmLsqmP0pzJkG1BV$/RjFoO3yBbdt78jPkQ1OsGXCSfe7yJRVuzgRX905S7o=",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "date_joined": "2023-01-04T00:00:00Z"
+    }
+  },
+  {
     "model": "printing_house_app.contacts",
     "pk": 1,
     "fields": {
@@ -67,6 +112,28 @@
     }
   },
   {
+    "model": "printing_house_app.contacts",
+    "pk": 3,
+    "fields": {
+      "user": 4,
+      "full_name": "Alice Johnson",
+      "gender": "F",
+      "age": 25,
+      "home_address": "789 Oak St, City, Country"
+    }
+  },
+  {
+    "model": "printing_house_app.contacts",
+    "pk": 4,
+    "fields": {
+      "user": 5,
+      "full_name": "Bob Brown",
+      "gender": "M",
+      "age": 35,
+      "home_address": "101 Pine St, City, Country"
+    }
+  },
+  {
     "model": "printing_house_app.premises",
     "pk": 1,
     "fields": {
@@ -85,6 +152,15 @@
     }
   },
   {
+    "model": "printing_house_app.premises",
+    "pk": 3,
+    "fields": {
+      "area": "400.00",
+      "machines_count": 8,
+      "type": "Packaging Area"
+    }
+  },
+  {
     "model": "printing_house_app.employees",
     "pk": 1,
     "fields": {
@@ -95,6 +171,16 @@
     }
   },
   {
+    "model": "printing_house_app.employees",
+    "pk": 2,
+    "fields": {
+      "user": 6,
+      "position": "Operator",
+      "salary": "30000.00",
+      "premises": 2
+    }
+  },
+  {
     "model": "printing_house_app.access",
     "pk": 1,
     "fields": {
@@ -102,6 +188,16 @@
       "employee_position": "Manager",
       "password": "securepass",
       "employee": 1
+    }
+  },
+  {
+    "model": "printing_house_app.access",
+    "pk": 2,
+    "fields": {
+      "access_level": "User",
+      "employee_position": "Operator",
+      "password": "operatorpass",
+      "employee": 2
     }
   },
   {
@@ -124,6 +220,28 @@
       "premises": 1,
       "type": "High Quality Printing",
       "cost": "20.00"
+    }
+  },
+  {
+    "model": "printing_house_app.service",
+    "pk": 3,
+    "fields": {
+      "package": "Binding Service",
+      "material": "Cardboard",
+      "premises": 2,
+      "type": "Book Binding",
+      "cost": "5.00"
+    }
+  },
+  {
+    "model": "printing_house_app.service",
+    "pk": 4,
+    "fields": {
+      "package": "Packaging",
+      "material": "Plastic",
+      "premises": 3,
+      "type": "Box Packaging",
+      "cost": "3.00"
     }
   },
   {
@@ -183,6 +301,54 @@
     }
   },
   {
+    "model": "printing_house_app.order",
+    "pk": 3,
+    "fields": {
+      "client_name": "Alice Johnson",
+      "order_date": "2023-10-03",
+      "print_date": "2023-10-07",
+      "service_package": "Basic Print",
+      "quantity": 200,
+      "amount": "2000.00",
+      "address": "789 Oak St, City, Country",
+      "client": 3,
+      "service": 1,
+      "premises": 1
+    }
+  },
+  {
+    "model": "printing_house_app.order",
+    "pk": 4,
+    "fields": {
+      "client_name": "Bob Brown",
+      "order_date": "2023-10-04",
+      "print_date": "2023-10-08",
+      "service_package": "Binding Service",
+      "quantity": 10,
+      "amount": "50.00",
+      "address": "101 Pine St, City, Country",
+      "client": 4,
+      "service": 3,
+      "premises": 2
+    }
+  },
+  {
+    "model": "printing_house_app.order",
+    "pk": 5,
+    "fields": {
+      "client_name": "John Doe",
+      "order_date": "2023-10-05",
+      "print_date": "2023-10-09",
+      "service_package": "Packaging",
+      "quantity": 50,
+      "amount": "150.00",
+      "address": "123 Main St, City, Country",
+      "client": 1,
+      "service": 4,
+      "premises": 3
+    }
+  },
+  {
     "model": "printing_house_app.delivery",
     "pk": 1,
     "fields": {
@@ -192,7 +358,7 @@
       "address": "123 Main St, City, Country",
       "order": 1,
       "employee": 1,
-      "status": 1
+      "status": 3
     }
   },
   {
@@ -205,7 +371,33 @@
       "address": "456 Elm St, City, Country",
       "order": 2,
       "employee": 1,
-      "status": 2
+      "status": 3
+    }
+  },
+  {
+    "model": "printing_house_app.delivery",
+    "pk": 3,
+    "fields": {
+      "packaging_type": "Box",
+      "volume": "15.00",
+      "weight": "7.00",
+      "address": "789 Oak St, City, Country",
+      "order": 3,
+      "employee": 2,
+      "status": 3
+    }
+  },
+  {
+    "model": "printing_house_app.delivery",
+    "pk": 4,
+    "fields": {
+      "packaging_type": "Package",
+      "volume": "8.00",
+      "weight": "3.00",
+      "address": "101 Pine St, City, Country",
+      "order": 4,
+      "employee": 2,
+      "status": 3
     }
   },
   {
@@ -222,6 +414,22 @@
     "fields": {
       "review_text": "Quality printing, will order again.",
       "order": 2
+    }
+  },
+  {
+    "model": "printing_house_app.review",
+    "pk": 3,
+    "fields": {
+      "review_text": "Excellent packaging, very satisfied.",
+      "order": 3
+    }
+  },
+  {
+    "model": "printing_house_app.review",
+    "pk": 4,
+    "fields": {
+      "review_text": "Binding service was perfect.",
+      "order": 4
     }
   }
 ]

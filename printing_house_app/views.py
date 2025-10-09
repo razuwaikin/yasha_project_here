@@ -102,6 +102,51 @@ class CompletedOrdersView(generics.ListAPIView):
             return Order.objects.none()
         return Order.objects.filter(delivery__status__status='Delivered')
 
+class ReviewsReportView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        if not (has_role(self.request.user, 'manager') or has_role(self.request.user, 'owner')):
+            return Review.objects.none()
+        return Review.objects.select_related('order').all()
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        data = []
+        for review in queryset:
+            data.append({
+                'review_id': review.id,
+                'order_id': review.order.id,
+                'review_text': review.review_text,
+                'client_name': review.order.client_name,
+                'order_date': review.order.order_date
+            })
+        return Response(data)
+
+class DeliveriesReportView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        if not (has_role(self.request.user, 'manager') or has_role(self.request.user, 'owner')):
+            return Delivery.objects.none()
+        return Delivery.objects.select_related('order', 'employee', 'status').all()
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        data = []
+        for delivery in queryset:
+            data.append({
+                'delivery_id': delivery.id,
+                'order_id': delivery.order.id,
+                'packaging_type': delivery.packaging_type,
+                'volume': delivery.volume,
+                'weight': delivery.weight,
+                'address': delivery.address,
+                'status': delivery.status.status,
+                'employee_name': delivery.employee.user.get_full_name() if delivery.employee else None
+            })
+        return Response(data)
+
 # UI Views
 
 def login_view(request):
@@ -219,3 +264,19 @@ def create_review(request):
         form = ReviewForm()
         orders = Order.objects.filter(client__user=request.user, review__isnull=True)
     return render(request, 'printing_house_app/create_review.html', {'form': form, 'orders': orders})
+
+@login_required
+def reviews_report(request):
+    if not (has_role(request.user, 'manager') or has_role(request.user, 'owner')):
+        messages.error(request, 'Permission denied')
+        return redirect('dashboard')
+    reviews = Review.objects.select_related('order').all()
+    return render(request, 'printing_house_app/reviews_report.html', {'reviews': reviews})
+
+@login_required
+def deliveries_report(request):
+    if not (has_role(request.user, 'manager') or has_role(request.user, 'owner')):
+        messages.error(request, 'Permission denied')
+        return redirect('dashboard')
+    deliveries = Delivery.objects.select_related('order', 'employee', 'status').all()
+    return render(request, 'printing_house_app/deliveries_report.html', {'deliveries': deliveries})

@@ -21,6 +21,8 @@
         <li><a href="{% url 'average_salary' %}" class="btn">View Average Salary</a></li>
         <li><a href="{% url 'completed_orders' %}" class="btn">View Completed Orders</a></li>
         <li><a href="{% url 'create_order' %}" class="btn">Create New Order</a></li>
+        <li><a href="{% url 'reviews_report' %}" class="btn">Reviews Report</a></li>
+        <li><a href="{% url 'deliveries_report' %}" class="btn">Deliveries Report</a></li>
     </ul>
 {% elif user|has_role_filter:'courier' %}
     <h3>Courier Dashboard</h3>
@@ -36,6 +38,8 @@
         <li><a href="{% url 'average_salary' %}" class="btn">View Average Salary</a></li>
         <li><a href="{% url 'completed_orders' %}" class="btn">View Completed Orders</a></li>
         <li><a href="{% url 'create_order' %}" class="btn">Create New Order</a></li>
+        <li><a href="{% url 'reviews_report' %}" class="btn">Reviews Report</a></li>
+        <li><a href="{% url 'deliveries_report' %}" class="btn">Deliveries Report</a></li>
         <li><a href="/admin/" class="btn">Admin Panel</a></li>
     </ul>
 {% else %}

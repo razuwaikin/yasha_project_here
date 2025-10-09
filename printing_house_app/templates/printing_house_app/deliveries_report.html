@@ -1,0 +1,40 @@
+{% extends "printing_house_app/base.html" %}
+
+{% block title %}Deliveries Report{% endblock %}
+
+{% block content %}
+<h2>Deliveries Report</h2>
+
+{% if deliveries %}
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Order ID</th>
+            <th>Packaging Type</th>
+            <th>Volume</th>
+            <th>Weight</th>
+            <th>Address</th>
+            <th>Status</th>
+            <th>Employee</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for delivery in deliveries %}
+        <tr>
+            <td>{{ delivery.id }}</td>
+            <td>{{ delivery.order.id }}</td>
+            <td>{{ delivery.packaging_type }}</td>
+            <td>{{ delivery.volume }}</td>
+            <td>{{ delivery.weight }}</td>
+            <td>{{ delivery.address }}</td>
+            <td>{{ delivery.status.status }}</td>
+            <td>{{ delivery.employee.user.get_full_name }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No deliveries found.</p>
+{% endif %}
+{% endblock %}

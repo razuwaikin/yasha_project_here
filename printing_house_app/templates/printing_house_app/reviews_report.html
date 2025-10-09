@@ -1,0 +1,34 @@
+{% extends "printing_house_app/base.html" %}
+
+{% block title %}Reviews Report{% endblock %}
+
+{% block content %}
+<h2>Reviews Report</h2>
+
+{% if reviews %}
+<table>
+    <thead>
+        <tr>
+            <th>Review ID</th>
+            <th>Order ID</th>
+            <th>Client Name</th>
+            <th>Order Date</th>
+            <th>Review Text</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for review in reviews %}
+        <tr>
+            <td>{{ review.id }}</td>
+            <td>{{ review.order.id }}</td>
+            <td>{{ review.order.client_name }}</td>
+            <td>{{ review.order.order_date }}</td>
+            <td>{{ review.review_text }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No reviews found.</p>
+{% endif %}
+{% endblock %}
